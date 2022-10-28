@@ -1,0 +1,88 @@
+﻿@page "/products"
+@using APIKarolinska.Shared
+@inject HttpClient Http
+
+<PageTitle>Produkter</PageTitle>
+
+<h1>Produkter</h1>
+<h3>@response</h3>
+
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Namn</th>
+                <th>Pris</th>
+                <th>Antal</th>
+                <th>Totalt Pris</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in order.Products)
+    {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Amount</td>
+                <td>@(item.Amount * item.Price)</td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <button class="btn btn-primary btn-sm" @onclick="SendOrder">Skicka Order</button>
+
+@if (products != null)
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var product in products)
+            {
+                <div class="card m-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">Pris: @product.Price</p>
+                        <EditForm Model="@product">
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Antal</span>
+                            <InputNumber @bind-Value="product.Amount" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
+                        </div>
+                        <button class="btn btn-primary btn-sm" @onclick=" _ => AddProduct(product)">Lägg till</button>
+                        </EditForm>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+}
+
+@code {
+    private string response = "";
+    private ProductDTO[]? products;
+    private OrderDTO order = new() { Products = new List<ProductDTO>() };
+    protected override async Task OnInitializedAsync()
+    {
+        products = await Http.GetFromJsonAsync<ProductDTO[]>("Product");
+    }
+
+    private async Task AddProduct(ProductDTO product) {
+        if(product.Amount <= 0)
+            return;
+
+        var productInOrder = order.Products.FirstOrDefault(x => x.Id == product.Id);
+        if(productInOrder is null)
+            order.Products = order.Products.Append(new ProductDTO() { Id = product.Id, Amount = product.Amount, Name = product.Name, Price = product.Price});
+        else
+            productInOrder.Amount += product.Amount;
+        StateHasChanged();
+    }
+
+    private async Task SendOrder() {
+        var result = await Http.PostAsJsonAsync("Order", order);
+        if(!result.IsSuccessStatusCode)
+            response = await result.Content.ReadAsStringAsync();
+        else
+            response = "Skickad";
+        StateHasChanged();
+    }
+}

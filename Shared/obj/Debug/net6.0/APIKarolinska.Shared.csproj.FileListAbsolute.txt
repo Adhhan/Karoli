@@ -1,0 +1,12 @@
+C:\Users\adham\source\repos\APIKarolinska\Shared\bin\Debug\net6.0\APIKarolinska.Shared.deps.json
+C:\Users\adham\source\repos\APIKarolinska\Shared\bin\Debug\net6.0\APIKarolinska.Shared.dll
+C:\Users\adham\source\repos\APIKarolinska\Shared\bin\Debug\net6.0\APIKarolinska.Shared.pdb
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\APIKarolinska.Shared.csproj.AssemblyReference.cache
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\APIKarolinska.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\APIKarolinska.Shared.AssemblyInfoInputs.cache
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\APIKarolinska.Shared.AssemblyInfo.cs
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\APIKarolinska.Shared.csproj.CoreCompileInputs.cache
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\APIKarolinska.Shared.dll
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\refint\APIKarolinska.Shared.dll
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\APIKarolinska.Shared.pdb
+C:\Users\adham\source\repos\APIKarolinska\Shared\obj\Debug\net6.0\ref\APIKarolinska.Shared.dll

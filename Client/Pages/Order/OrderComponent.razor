@@ -1,0 +1,30 @@
+﻿@inherits OrderBase
+
+<h2>Order</h2>
+<div class="container">
+    @if (Order != null && Order.Products != null)
+    {
+        <p>ID: @Order.Id</p>
+        <p>LeveransDatum: @Order.DeliveryDate</p>
+        <p>Total Kostnad: @Order.TotalCost</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Order.Products)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.Amount</td>
+                        <td>@product.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

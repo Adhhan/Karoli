@@ -1,0 +1,50 @@
+﻿@page "/orders"
+@using APIKarolinska.Shared
+@inject HttpClient Http
+
+<PageTitle>Orders</PageTitle>
+
+<h1>Orders</h1>
+
+
+<OrderComponent Order="selectedOrder"/>
+
+@if (orders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Leveransdatum</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in orders)
+            {
+                <tr @onclick="@(_ => ShowOrder(order))">
+                    <td>@order.Id</td>
+                    <td>@order.DeliveryDate.ToShortDateString()</td>
+                    <td>@order.TotalCost</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private OrderDTO[]? orders;
+    private OrderDTO selectedOrder = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        orders = await Http.GetFromJsonAsync<OrderDTO[]>("Order");
+    }
+
+    private void ShowOrder(OrderDTO order) => selectedOrder = order;
+    
+}

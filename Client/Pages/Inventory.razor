@@ -1,0 +1,44 @@
+﻿@page "/inventory"
+@using APIKarolinska.Shared
+@inject HttpClient Http
+
+<PageTitle>Inventory</PageTitle>
+
+<h1>Inventory</h1>
+
+
+@if (inventory == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inventory in inventory)
+            {
+                <tr>
+                    <td>@inventory.Name</td>
+                    <td>@inventory.Amount</td>
+                    <td>@inventory.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private ProductDTO[]? inventory;
+
+    protected override async Task OnInitializedAsync()
+    {
+        inventory = await Http.GetFromJsonAsync<ProductDTO[]>("Inventory");
+    }
+}
